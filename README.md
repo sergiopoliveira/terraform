@@ -1,6 +1,6 @@
 # Terraform 
 
-Terraform is declarative.
+Terraform is an open-source infrastructure as code software tool.
 
 ## Commands
 

@@ -8,7 +8,7 @@ provider "aws" {
 variable "subnet_prefix" {
     description = "cidr block for the subnet" 
     #default
-    #type
+    type = string
 }
 
 # 1. Create vpc
@@ -47,11 +47,11 @@ resource "aws_route_table" "prod-route-table" {
 # 4. Create a Subnet
 resource "aws_subnet" "subnet-1" {
     vpc_id = aws_vpc.prod-vpc.id
-    cidr_block = var.subnet_prefix
+    cidr_block = var.subnet_prefix[0].cidr_block
     availability_zone = "us-east-1a"
 
     tags {
-        Name = "prod-subnet"
+        Name = var.subnet_prefix[1].name
     }
 }
 
@@ -153,4 +153,17 @@ resource "aws_instance" "web-server-instance" {
    output "server_id" {
        value = aws_instance.web-server-instance.id
    }
+}
+
+
+## example list of variables
+
+resource "aws_subnet" "subnet-2" {
+    vpc_id = aws_vpc.prod-vpc.id
+    cidr_block = var.subnet_prefix[1].cidr_block
+    availability_zone = "us-east-1a"
+
+    tags {
+        Name = var.subnet_prefix[1].name
+    }
 }

@@ -11,7 +11,7 @@ resource "aws_instance" "my-first-server" {
 
     tags = {
         Name = "ubuntu"
-    }
+    } 
 }
 
 #resource "<provider>_<resource_type>" "name" {
